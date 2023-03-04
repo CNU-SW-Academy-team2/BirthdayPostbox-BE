@@ -1,7 +1,9 @@
 package com.project.BirthdayPostbox.converter;
 
 import com.project.BirthdayPostbox.dto.MessageDTO;
+import com.project.BirthdayPostbox.dto.PresentDTO;
 import com.project.BirthdayPostbox.entity.Message;
+import com.project.BirthdayPostbox.entity.Present;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,4 +24,12 @@ public class EntityConverter {
                 .build();
     }
 
+    public PresentDTO convertPresentDto(Present present) {
+        return PresentDTO.builder()
+                .presentId(present.getPresentId())
+                .presentSender(present.getPresentSender())
+                .presentContent(present.getPresentContent())
+                .presentUrl(present.getPresentImgUrl())
+                .build();
+    }
 }
