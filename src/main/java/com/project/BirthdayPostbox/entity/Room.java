@@ -1,45 +1,22 @@
 package com.project.BirthdayPostbox.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Date;
 
+@Getter
+@Setter
 @Entity
+@Table(name = "room")
 public class Room {
     @Id
+    @Column(name = "room_id")
     private String roomId;
+    private String roomName;
     private Date roomBirthdate;
     private String roomEmail;
     private String ownerCode;
-
-    public String getRoomId() {
-        return roomId;
-    }
-
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
-    }
-    public Date getRoomBirthdate() {
-        return roomBirthdate;
-    }
-
-    public void setRoomBirthdate(Date roomBirthdate) {
-        this.roomBirthdate = roomBirthdate;
-    }
-    public String getRoomEmail() {
-        return roomEmail;
-    }
-
-    public void setRoomEmail(String roomEmail) {
-        this.roomEmail = roomEmail;
-    }
-    public String getOwnerCode() {
-        return ownerCode;
-    }
-
-    public void setOwnerCode(String ownerCode) {
-        this.ownerCode = ownerCode;
-    }
 }
