@@ -1,36 +1,32 @@
 package com.project.BirthdayPostbox.entity;
-
-
 import com.project.BirthdayPostbox.dto.RoomDTO;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import java.sql.Date;
 
-
-import java.util.Date;
-@Entity
 @Getter
 @Setter
-@Table(name ="room_table")
+@Entity
+@Table(name ="room")
 public class RoomEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-    @Column(length = 6, nullable = false)
+    @Column(name = "room_id")
     private String roomId;
-    @Column(length = 60, nullable = false)
+    @Column(name = "room_name")
     private String roomName;
-    @Column(nullable = false)
-    private String roomBirthdate; //Date로 하면 오류 있어서 일단 String으로
-    @Column(length = 50, nullable = false)
+    @Column(name = "room_birthdate")
+    private Date roomBirthdate;
+    @Column(name = "room_email")
     private String roomEmail;
-    @Column(length = 6)
+    @Column(name = "owner_code")
     private String ownerCode;
 
     public static RoomEntity toSaveEntity(RoomDTO roomDTO) {
         RoomEntity roomEntity = new RoomEntity();
         roomEntity.setRoomId(roomDTO.getRoomId());
-        roomEntity.setRoomName(roomDTO.getRoomBirthdate());
+        roomEntity.setRoomName(roomDTO.getRoomName());
         roomEntity.setRoomBirthdate(roomDTO.getRoomBirthdate());
         roomEntity.setRoomEmail(roomDTO.getRoomEmail());
         roomEntity.setOwnerCode(roomDTO.getOwnerCode());
