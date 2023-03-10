@@ -7,6 +7,7 @@ import com.project.BirthdayPostbox.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -32,5 +33,26 @@ public class RoomService {
             }
         }
         return buf;
+    }
+    public void getRoomcontents(String roomId) {
+        RoomDTO roomDTO = findById(roomId);
+        System.out.println(roomDTO);
+
+        //TODO : room_id에 맞는 message 받아오기
+
+        //TODO : room_id에 맞는 present 받아오기
+
+        //TODO : return json으로
+    }
+    public RoomDTO findById(String roomId) {
+        Optional<RoomEntity> optionalRoomEntity = roomRepository.findById(roomId);
+        if(optionalRoomEntity.isPresent()) {
+            RoomEntity roomEntity = optionalRoomEntity.get();
+            RoomDTO roomDTO = RoomDTO.toRoomDTO(roomEntity);
+            return roomDTO;
+        }else {
+            return null;
+        }
+
     }
 }

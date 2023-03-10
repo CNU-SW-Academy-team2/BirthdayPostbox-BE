@@ -17,4 +17,9 @@ public class RoomController {
         System.out.println("room = " + roomDTO);
         return roomService.save(roomDTO);
     }
+    @RequestMapping("room-content")
+    public String getRoomcontents(@RequestParam("room_id") String room_id) {
+        roomService.getRoomcontents(room_id);
+        return "test";
+    }
 }
