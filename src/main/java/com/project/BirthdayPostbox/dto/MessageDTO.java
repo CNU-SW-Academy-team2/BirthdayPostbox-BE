@@ -1,6 +1,8 @@
 package com.project.BirthdayPostbox.dto;
 
+import com.project.BirthdayPostbox.entity.MessageEntity;
 import lombok.*;
+import org.aspectj.bridge.Message;
 
 @Getter
 @Setter
@@ -11,4 +13,13 @@ public class MessageDTO {
     private String messageId;
     private String messageSender;
     private String messageContent;
+
+    public static MessageDTO toRoomDTO(MessageEntity messageEntity) {
+        MessageDTO messageDTO = new MessageDTO();
+        messageDTO.setMessageId(messageEntity.getMessageId());
+        messageDTO.setMessageSender(messageEntity.getMessageSender());
+        messageDTO.setMessageContent(messageEntity.getMessageSender());
+
+        return messageDTO;
+    }
 }

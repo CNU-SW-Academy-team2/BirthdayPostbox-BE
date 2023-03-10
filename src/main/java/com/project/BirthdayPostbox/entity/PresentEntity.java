@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Present {
+public class PresentEntity {
     @Id
     private String presentId;
     private String roomId;
