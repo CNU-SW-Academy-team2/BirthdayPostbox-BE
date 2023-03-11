@@ -26,6 +26,6 @@ public class Message {
 
     @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "room_id")
-    private Room room;
+    private RoomEntity room;
 
 }
