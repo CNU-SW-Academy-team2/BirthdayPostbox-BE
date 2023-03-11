@@ -11,5 +11,7 @@ public class PresentDTO {
     private String presentId;
     private String presentSender;
     private String presentContent;
-    private String presentUrl;
+    private String presentImgUrl;
+    private String roomId;
+    private RoomDTO roomDTO;
 }

@@ -11,4 +11,6 @@ public class MessageDTO {
     private String messageId;
     private String messageSender;
     private String messageContent;
+    private String roomId;
+    private RoomDTO roomDTO;
 }

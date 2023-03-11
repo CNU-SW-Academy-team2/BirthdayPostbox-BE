@@ -1,17 +1,21 @@
 package com.project.BirthdayPostbox.controller;
 
 import com.project.BirthdayPostbox.dto.PresentDTO;
+import com.project.BirthdayPostbox.entity.Present;
 import com.project.BirthdayPostbox.service.PresentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class PresentController {
 
     @Autowired
     PresentService service;
+
+    @RequestMapping(value = "new-present", method = RequestMethod.POST)
+    public void newPresent(@RequestBody PresentDTO presentDTO) {
+        service.newPresent(presentDTO);
+    }
 
     @RequestMapping("present")
     public PresentDTO showPresent(@RequestParam("id") String present_id) throws Exception {
