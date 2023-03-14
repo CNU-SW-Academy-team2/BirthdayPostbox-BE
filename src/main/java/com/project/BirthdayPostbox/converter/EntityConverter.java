@@ -57,7 +57,6 @@ public class EntityConverter {
                 .messageId(message.getMessageId())
                 .messageSender(message.getMessageSender())
                 .messageContent(message.getMessageContent())
-                .roomId(message.getRoom().getRoomId())
                 .roomDTO(RoomDTO.toRoomDTO(message.getRoom()))
                 .build();
     }
@@ -68,7 +67,6 @@ public class EntityConverter {
                 .presentSender(present.getPresentSender())
                 .presentContent(present.getPresentContent())
                 .presentImgUrl(present.getPresentImgUrl())
-                .roomId(present.getRoom().getRoomId())
                 .roomDTO(RoomDTO.toRoomDTO(present.getRoom()))
                 .build();
     }

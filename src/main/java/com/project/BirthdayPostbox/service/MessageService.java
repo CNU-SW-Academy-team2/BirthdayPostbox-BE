@@ -7,6 +7,9 @@ import com.project.BirthdayPostbox.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+import java.util.Random;
+
 @Service
 public class MessageService {
 
@@ -18,6 +21,11 @@ public class MessageService {
 
 
     public void newMessage(MessageDTO messageDTO) {
+        String randomId = createId().toString();
+        while (repository.existsById(randomId)){
+            randomId = createId().toString();
+        }
+        messageDTO.setMessageId(randomId);
         Message message = entityConverter.convertMessage(messageDTO);
         repository.save(message);
     }
@@ -26,5 +34,19 @@ public class MessageService {
         return repository.findById(msg_id).
                 map(entityConverter::convertMessageDto)
                 .orElseThrow(() -> new Exception("메세지를 찾을 수 없습니다."));
+    }
+
+    public StringBuffer createId() {
+        Random rnd = new Random();
+        StringBuffer buf = new StringBuffer();
+
+        for(int i = 0; i < 6; i++) {
+            if(rnd.nextBoolean()){
+                buf.append((char)((int)(rnd.nextInt(26))+97));
+            }else{
+                buf.append((rnd.nextInt(10)));
+            }
+        }
+        return buf;
     }
 }
