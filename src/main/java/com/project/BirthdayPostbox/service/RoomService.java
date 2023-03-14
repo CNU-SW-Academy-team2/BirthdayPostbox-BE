@@ -16,6 +16,7 @@ import java.util.Random;
 public class RoomService {
     @Autowired
     private RoomRepository roomRepository;
+    @Autowired
     private MessageService messageService;
     public String save(RoomDTO roomDTO) {
         String RoomID = createRoomid().toString();
@@ -42,10 +43,12 @@ public class RoomService {
         System.out.println(roomDTO);
 
         //TODO : room_id에 맞는 message 받아오기
+        System.out.println(roomId);
         MessageDTO messageDTO = messageService.findByRoomId(roomId);
         System.out.println(messageDTO);
 
         //TODO : room_id에 맞는 present 받아오기
+
 
         //TODO : return json으로
     }

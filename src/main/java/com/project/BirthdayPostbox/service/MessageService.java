@@ -26,10 +26,10 @@ public class MessageService {
                 .orElseThrow(() -> new Exception("메세지를 찾을 수 없습니다."));
     }
     public MessageDTO findByRoomId(String roomId) {
-        Optional<MessageEntity> optionalMessageEntity = repository.findById(roomId);
+        Optional<MessageEntity> optionalMessageEntity = repository.findALL(roomId);
         if(optionalMessageEntity.isPresent()) {
             MessageEntity messageEntity = optionalMessageEntity.get();
-            MessageDTO messageDTO = MessageDTO.toRoomDTO(messageEntity);
+            MessageDTO messageDTO = MessageDTO.toMessageDTO(messageEntity);
             return messageDTO;
         }else {
             return null;
