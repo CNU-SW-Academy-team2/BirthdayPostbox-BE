@@ -23,4 +23,8 @@ public class RoomController {
         JsonObject returnJson = roomService.getRoomcontents(room_id);
         return returnJson;
     }
+    @RequestMapping("test")
+    public String test() {
+        return "test";
+    }
 }
