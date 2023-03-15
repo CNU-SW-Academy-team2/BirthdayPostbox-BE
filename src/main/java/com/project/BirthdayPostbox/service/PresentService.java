@@ -2,7 +2,7 @@ package com.project.BirthdayPostbox.service;
 
 import com.project.BirthdayPostbox.converter.EntityConverter;
 import com.project.BirthdayPostbox.dto.PresentDTO;
-import com.project.BirthdayPostbox.entity.Present;
+import com.project.BirthdayPostbox.entity.PresentEntity;
 import com.project.BirthdayPostbox.repository.PresentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,8 +23,8 @@ public class PresentService {
             randomId = createId().toString();
         }
         presentDTO.setPresentId(randomId);
-        Present present = entityConverter.convertPresent(presentDTO);
-        repository.save(present);
+        PresentEntity presentEntity = entityConverter.convertPresent(presentDTO);
+        repository.save(presentEntity);
     }
 
     public PresentDTO showPresent(String present_id) throws Exception {

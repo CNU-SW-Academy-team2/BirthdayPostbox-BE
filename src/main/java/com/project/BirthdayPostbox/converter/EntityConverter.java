@@ -3,8 +3,8 @@ package com.project.BirthdayPostbox.converter;
 import com.project.BirthdayPostbox.dto.MessageDTO;
 import com.project.BirthdayPostbox.dto.PresentDTO;
 import com.project.BirthdayPostbox.dto.RoomDTO;
-import com.project.BirthdayPostbox.entity.Message;
-import com.project.BirthdayPostbox.entity.Present;
+import com.project.BirthdayPostbox.entity.MessageEntity;
+import com.project.BirthdayPostbox.entity.PresentEntity;
 import com.project.BirthdayPostbox.entity.RoomEntity;
 import org.springframework.stereotype.Component;
 
@@ -22,23 +22,23 @@ public class EntityConverter {
 //        return room;
 //    }
 
-    public Message convertMessage(MessageDTO messageDTO) {
-        Message message = new Message();
-        message.setMessageId(messageDTO.getMessageId());
-        message.setMessageSender(messageDTO.getMessageSender());
-        message.setMessageContent(messageDTO.getMessageContent());
-        message.setRoom(RoomEntity.toSaveEntity(messageDTO.getRoomDTO()));
-        return message;
+    public MessageEntity convertMessage(MessageDTO messageDTO) {
+        MessageEntity messageEntity = new MessageEntity();
+        messageEntity.setMessageId(messageDTO.getMessageId());
+        messageEntity.setMessageSender(messageDTO.getMessageSender());
+        messageEntity.setMessageContent(messageDTO.getMessageContent());
+        messageEntity.setRoom(RoomEntity.toSaveEntity(messageDTO.getRoomDTO()));
+        return messageEntity;
     }
 
-    public Present convertPresent(PresentDTO presentDTO) {
-        Present present = new Present();
-        present.setPresentId(presentDTO.getPresentId());
-        present.setPresentSender(presentDTO.getPresentSender());
-        present.setPresentContent(presentDTO.getPresentContent());
-        present.setPresentImgUrl(presentDTO.getPresentImgUrl());
-        present.setRoom(RoomEntity.toSaveEntity(presentDTO.getRoomDTO()));
-        return present;
+    public PresentEntity convertPresent(PresentDTO presentDTO) {
+        PresentEntity presentEntity = new PresentEntity();
+        presentEntity.setPresentId(presentDTO.getPresentId());
+        presentEntity.setPresentSender(presentDTO.getPresentSender());
+        presentEntity.setPresentContent(presentDTO.getPresentContent());
+        presentEntity.setPresentImgUrl(presentDTO.getPresentImgUrl());
+        presentEntity.setRoom(RoomEntity.toSaveEntity(presentDTO.getRoomDTO()));
+        return presentEntity;
     }
 
     //entity -> dto
@@ -52,22 +52,22 @@ public class EntityConverter {
 //                .build();
 //    }
 
-    public MessageDTO convertMessageDto(Message message) {
+    public MessageDTO convertMessageDto(MessageEntity messageEntity) {
         return MessageDTO.builder()
-                .messageId(message.getMessageId())
-                .messageSender(message.getMessageSender())
-                .messageContent(message.getMessageContent())
-                .roomDTO(RoomDTO.toRoomDTO(message.getRoom()))
+                .messageId(messageEntity.getMessageId())
+                .messageSender(messageEntity.getMessageSender())
+                .messageContent(messageEntity.getMessageContent())
+                .roomDTO(RoomDTO.toRoomDTO(messageEntity.getRoom()))
                 .build();
     }
 
-    public PresentDTO convertPresentDto(Present present) {
+    public PresentDTO convertPresentDto(PresentEntity presentEntity) {
         return PresentDTO.builder()
-                .presentId(present.getPresentId())
-                .presentSender(present.getPresentSender())
-                .presentContent(present.getPresentContent())
-                .presentImgUrl(present.getPresentImgUrl())
-                .roomDTO(RoomDTO.toRoomDTO(present.getRoom()))
+                .presentId(presentEntity.getPresentId())
+                .presentSender(presentEntity.getPresentSender())
+                .presentContent(presentEntity.getPresentContent())
+                .presentImgUrl(presentEntity.getPresentImgUrl())
+                .roomDTO(RoomDTO.toRoomDTO(presentEntity.getRoom()))
                 .build();
     }
 
