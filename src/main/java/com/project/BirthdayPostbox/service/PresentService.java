@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class PresentService {
@@ -45,5 +48,15 @@ public class PresentService {
             }
         }
         return buf;
+
+    public List<PresentDTO> findByRoomId(String roomId) {
+        Collection<PresentEntity> presentEntities = repository.findByroom_id(roomId);
+        List<PresentDTO> presentDTOList = new ArrayList<>();
+        for(PresentEntity presentEntity : presentEntities) {
+            PresentDTO presentDTO = PresentDTO.toPresentDTO(presentEntity);
+            presentDTOList.add(presentDTO);
+        }
+        return presentDTOList;
+
     }
 }

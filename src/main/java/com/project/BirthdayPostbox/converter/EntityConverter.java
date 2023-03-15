@@ -53,6 +53,7 @@ public class EntityConverter {
 //    }
 
     public MessageDTO convertMessageDto(MessageEntity messageEntity) {
+
         return MessageDTO.builder()
                 .messageId(messageEntity.getMessageId())
                 .messageSender(messageEntity.getMessageSender())
@@ -70,5 +71,4 @@ public class EntityConverter {
                 .roomDTO(RoomDTO.toRoomDTO(presentEntity.getRoom()))
                 .build();
     }
-
 }

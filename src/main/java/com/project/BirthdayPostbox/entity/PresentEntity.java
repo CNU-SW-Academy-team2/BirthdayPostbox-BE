@@ -26,7 +26,8 @@ public class PresentEntity {
     @Column(name = "present_img_url")
     private String presentImgUrl;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = RoomEntity.class)
     @JoinColumn(name = "room_id", referencedColumnName = "room_id")
     private RoomEntity room;
+
 }

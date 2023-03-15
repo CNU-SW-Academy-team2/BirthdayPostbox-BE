@@ -24,7 +24,7 @@ public class MessageEntity {
     @Column(name = "message_content")
     private String messageContent;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = RoomEntity.class)
     @JoinColumn(name = "room_id", referencedColumnName = "room_id")
     private RoomEntity room;
 

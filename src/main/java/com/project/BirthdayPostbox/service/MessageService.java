@@ -2,12 +2,18 @@ package com.project.BirthdayPostbox.service;
 
 import com.project.BirthdayPostbox.converter.EntityConverter;
 import com.project.BirthdayPostbox.dto.MessageDTO;
+import com.project.BirthdayPostbox.dto.RoomDTO;
 import com.project.BirthdayPostbox.entity.MessageEntity;
+import com.project.BirthdayPostbox.entity.RoomEntity;
 import com.project.BirthdayPostbox.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MessageService {
@@ -47,5 +53,15 @@ public class MessageService {
             }
         }
         return buf;
-    }
+
+public List<MessageDTO> findByRoomId(String roomId) {
+        Collection<MessageEntity> messageEntities = repository.findByroom_id(roomId);
+        List<MessageDTO> messageDTOList = new ArrayList<>();
+        for(MessageEntity messageEntity : messageEntities) {
+            MessageDTO messageDTO = MessageDTO.toMessageDTO(messageEntity);
+            messageDTOList.add(messageDTO);
+        }
+        return messageDTOList;
+
+}
 }
