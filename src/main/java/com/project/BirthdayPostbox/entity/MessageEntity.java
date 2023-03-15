@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Message {
+public class MessageEntity {
 
     @Id
     @Column(name = "message_id")
@@ -24,8 +24,8 @@ public class Message {
     @Column(name = "message_content")
     private String messageContent;
 
-    @ManyToOne
-    @JoinColumn(name = "room_id", referencedColumnName = "room_id")
-    private Room room;
+    @ManyToOne(targetEntity = RoomEntity.class)
+    @JoinColumn(name = "room_id")
+    private RoomEntity room;
 
 }
