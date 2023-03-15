@@ -8,5 +8,7 @@ import java.util.Collection;
 
 @Repository
 public interface PresentRepository extends JpaRepository<PresentEntity, String> {
+
     Collection<PresentEntity> findByroom_id(String roomId);
+
 }

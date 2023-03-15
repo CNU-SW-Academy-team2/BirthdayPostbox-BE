@@ -2,34 +2,73 @@ package com.project.BirthdayPostbox.converter;
 
 import com.project.BirthdayPostbox.dto.MessageDTO;
 import com.project.BirthdayPostbox.dto.PresentDTO;
+import com.project.BirthdayPostbox.dto.RoomDTO;
 import com.project.BirthdayPostbox.entity.MessageEntity;
 import com.project.BirthdayPostbox.entity.PresentEntity;
+import com.project.BirthdayPostbox.entity.RoomEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class EntityConverter {
+
     //dto -> entity
-    public MessageEntity converMessage(MessageDTO messageDTO) {
-        MessageEntity message = new MessageEntity();
-        //추후 수정
-        return message;
+//    public Room convertRoom(RoomDTO roomDTO) {
+//        Room room = new Room();
+//        room.setRoomId(roomDTO.getRoomId());
+//        room.setRoomEmail(roomDTO.getRoomEmail());
+//        room.setRoomName(roomDTO.getRoomName());
+//        //room.setRoomBirthdate(roomDTO.getRoomBirthdate());
+//        room.setOwnerCode(roomDTO.getOwnerCode());
+//        return room;
+//    }
+
+    public MessageEntity convertMessage(MessageDTO messageDTO) {
+        MessageEntity messageEntity = new MessageEntity();
+        messageEntity.setMessageId(messageDTO.getMessageId());
+        messageEntity.setMessageSender(messageDTO.getMessageSender());
+        messageEntity.setMessageContent(messageDTO.getMessageContent());
+        messageEntity.setRoom(RoomEntity.toSaveEntity(messageDTO.getRoomDTO()));
+        return messageEntity;
+    }
+
+    public PresentEntity convertPresent(PresentDTO presentDTO) {
+        PresentEntity presentEntity = new PresentEntity();
+        presentEntity.setPresentId(presentDTO.getPresentId());
+        presentEntity.setPresentSender(presentDTO.getPresentSender());
+        presentEntity.setPresentContent(presentDTO.getPresentContent());
+        presentEntity.setPresentImgUrl(presentDTO.getPresentImgUrl());
+        presentEntity.setRoom(RoomEntity.toSaveEntity(presentDTO.getRoomDTO()));
+        return presentEntity;
     }
 
     //entity -> dto
-    public MessageDTO convertMessageDto(MessageEntity message) {
+//    public RoomDTO convertRoomDto(Room room){
+//        return RoomDTO.builder()
+//                .roomId(room.getRoomId())
+//                .roomName(room.getRoomName())
+//                .roomEmail(room.getRoomEmail())
+//                //.roomBirthdate(room.getRoomBirthdate())
+//                .ownerCode(room.getOwnerCode())
+//                .build();
+//    }
+
+    public MessageDTO convertMessageDto(MessageEntity messageEntity) {
+
         return MessageDTO.builder()
-                .messageId(message.getMessageId())
-                .messageSender(message.getMessageSender())
-                .messageContent(message.getMessageContent())
+                .messageId(messageEntity.getMessageId())
+                .messageSender(messageEntity.getMessageSender())
+                .messageContent(messageEntity.getMessageContent())
+                .roomDTO(RoomDTO.toRoomDTO(messageEntity.getRoom()))
                 .build();
     }
 
-    public PresentDTO convertPresentDto(PresentEntity present) {
+    public PresentDTO convertPresentDto(PresentEntity presentEntity) {
         return PresentDTO.builder()
-                .presentId(present.getPresentId())
-                .presentSender(present.getPresentSender())
-                .presentContent(present.getPresentContent())
-                .presentUrl(present.getPresentImgUrl())
+                .presentId(presentEntity.getPresentId())
+                .presentSender(presentEntity.getPresentSender())
+                .presentContent(presentEntity.getPresentContent())
+                .presentImgUrl(presentEntity.getPresentImgUrl())
+                .roomDTO(RoomDTO.toRoomDTO(presentEntity.getRoom()))
                 .build();
     }
 }

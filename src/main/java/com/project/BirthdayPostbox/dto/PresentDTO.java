@@ -12,6 +12,8 @@ public class PresentDTO {
     private String presentId;
     private String presentSender;
     private String presentContent;
+    private String presentImgUrl;
+    private RoomDTO roomDTO;
     private String presentUrl;
 
     public static PresentDTO toPresentDTO(PresentEntity presentEntity) {

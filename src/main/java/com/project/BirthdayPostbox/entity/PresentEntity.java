@@ -16,14 +16,18 @@ public class PresentEntity {
     @Id
     @Column(name = "present_id")
     private String presentId;
+
     @Column(name = "present_sender")
     private String presentSender;
+
     @Column(name = "present_content")
     private String presentContent;
+
     @Column(name = "present_img_url")
     private String presentImgUrl;
+
     @ManyToOne(targetEntity = RoomEntity.class)
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "room_id", referencedColumnName = "room_id")
     private RoomEntity room;
 
 }
