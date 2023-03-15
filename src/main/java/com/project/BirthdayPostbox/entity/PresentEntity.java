@@ -1,8 +1,6 @@
 package com.project.BirthdayPostbox.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,10 +14,16 @@ import lombok.Setter;
 @AllArgsConstructor
 public class PresentEntity {
     @Id
+    @Column(name = "present_id")
     private String presentId;
-    private String roomId;
+    @Column(name = "present_sender")
     private String presentSender;
+    @Column(name = "present_content")
     private String presentContent;
+    @Column(name = "present_img_url")
     private String presentImgUrl;
+    @ManyToOne(targetEntity = RoomEntity.class)
+    @JoinColumn(name = "room_id")
+    private RoomEntity room;
 
 }

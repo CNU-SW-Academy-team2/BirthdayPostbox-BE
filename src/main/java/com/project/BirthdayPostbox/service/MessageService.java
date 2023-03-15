@@ -9,6 +9,9 @@ import com.project.BirthdayPostbox.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,14 +28,13 @@ public class MessageService {
                 map(entityConverter::convertMessageDto)
                 .orElseThrow(() -> new Exception("메세지를 찾을 수 없습니다."));
     }
-    public MessageDTO findByRoomId(String roomId) {
-        Optional<MessageEntity> optionalMessageEntity = repository.findALL(roomId);
-        if(optionalMessageEntity.isPresent()) {
-            MessageEntity messageEntity = optionalMessageEntity.get();
+    public List<MessageDTO> findByRoomId(String roomId) {
+        Collection<MessageEntity> messageEntities = repository.findByroom_id(roomId);
+        List<MessageDTO> messageDTOList = new ArrayList<>();
+        for(MessageEntity messageEntity : messageEntities) {
             MessageDTO messageDTO = MessageDTO.toMessageDTO(messageEntity);
-            return messageDTO;
-        }else {
-            return null;
+            messageDTOList.add(messageDTO);
         }
+        return messageDTOList;
     }
 }

@@ -13,7 +13,7 @@ import java.sql.Date;
 public class RoomEntity {
     @Id
     @Column(name = "room_id")
-    private String roomId;
+    private String id;
     @Column(name = "room_name")
     private String roomName;
     @Column(name = "room_birthdate")
@@ -25,7 +25,7 @@ public class RoomEntity {
 
     public static RoomEntity toSaveEntity(RoomDTO roomDTO) {
         RoomEntity roomEntity = new RoomEntity();
-        roomEntity.setRoomId(roomDTO.getRoomId());
+        roomEntity.setId(roomDTO.getRoomId());
         roomEntity.setRoomName(roomDTO.getRoomName());
         roomEntity.setRoomBirthdate(roomDTO.getRoomBirthdate());
         roomEntity.setRoomEmail(roomDTO.getRoomEmail());
