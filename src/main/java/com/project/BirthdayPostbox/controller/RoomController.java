@@ -23,8 +23,10 @@ public class RoomController {
         JsonObject returnJson = roomService.getRoomcontents(room_id);
         return returnJson;
     }
+//    @CrossOrigin(origins = "http://localhost:3001")
     @RequestMapping("test")
     public String test() {
+        System.out.println("he");
         return "test";
     }
 }
