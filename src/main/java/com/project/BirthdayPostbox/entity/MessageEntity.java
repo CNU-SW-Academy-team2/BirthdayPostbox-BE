@@ -7,26 +7,25 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "present")
+@Table(name = "message")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Present {
+public class MessageEntity {
+
     @Id
-    @Column(name = "present_id")
-    private String presentId;
+    @Column(name = "message_id")
+    private String messageId;
 
-    @Column(name = "present_sender")
-    private String presentSender;
+    @Column(name = "message_sender")
+    private String messageSender;
 
-    @Column(name = "present_content")
-    private String presentContent;
-
-    @Column(name = "present_img_url")
-    private String presentImgUrl;
+    @Column(name = "message_content")
+    private String messageContent;
 
     @ManyToOne
     @JoinColumn(name = "room_id", referencedColumnName = "room_id")
     private RoomEntity room;
+
 }

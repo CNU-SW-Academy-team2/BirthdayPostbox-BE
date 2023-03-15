@@ -1,7 +1,6 @@
 package com.project.BirthdayPostbox.controller;
 
 import com.project.BirthdayPostbox.dto.PresentDTO;
-import com.project.BirthdayPostbox.entity.Present;
 import com.project.BirthdayPostbox.service.PresentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
