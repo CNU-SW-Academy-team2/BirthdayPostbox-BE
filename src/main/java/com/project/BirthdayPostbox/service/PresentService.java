@@ -40,14 +40,16 @@ public class PresentService {
         Random rnd = new Random();
         StringBuffer buf = new StringBuffer();
 
-        for(int i = 0; i < 6; i++) {
-            if(rnd.nextBoolean()){
-                buf.append((char)((int)(rnd.nextInt(26))+97));
-            }else{
+        for (int i = 0; i < 6; i++) {
+            if (rnd.nextBoolean()) {
+                buf.append((char) ((int) (rnd.nextInt(26)) + 97));
+            } else {
                 buf.append((rnd.nextInt(10)));
             }
         }
         return buf;
+
+    }
 
     public List<PresentDTO> findByRoomId(String roomId) {
         Collection<PresentEntity> presentEntities = repository.findByroom_id(roomId);

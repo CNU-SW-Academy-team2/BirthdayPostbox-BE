@@ -45,16 +45,17 @@ public class MessageService {
         Random rnd = new Random();
         StringBuffer buf = new StringBuffer();
 
-        for(int i = 0; i < 6; i++) {
-            if(rnd.nextBoolean()){
-                buf.append((char)((int)(rnd.nextInt(26))+97));
-            }else{
+        for (int i = 0; i < 6; i++) {
+            if (rnd.nextBoolean()) {
+                buf.append((char) ((int) (rnd.nextInt(26)) + 97));
+            } else {
                 buf.append((rnd.nextInt(10)));
             }
         }
         return buf;
+    }
 
-public List<MessageDTO> findByRoomId(String roomId) {
+    public List<MessageDTO> findByRoomId(String roomId) {
         Collection<MessageEntity> messageEntities = repository.findByroom_id(roomId);
         List<MessageDTO> messageDTOList = new ArrayList<>();
         for(MessageEntity messageEntity : messageEntities) {
