@@ -6,16 +6,16 @@ import com.project.BirthdayPostbox.Exception.ErrorCreate;
 import com.project.BirthdayPostbox.dto.MessageDTO;
 import com.project.BirthdayPostbox.dto.PresentDTO;
 import com.project.BirthdayPostbox.dto.RoomDTO;
-import com.project.BirthdayPostbox.entity.MessageEntity;
 import com.project.BirthdayPostbox.entity.RoomEntity;
-import com.project.BirthdayPostbox.repository.MessageRepository;
 import com.project.BirthdayPostbox.repository.RoomRepository;
+import com.project.BirthdayPostbox.util.EntityConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
+
+import static com.project.BirthdayPostbox.util.RoomIdCreate.createRandomId;
 
 @Service
 public class RoomService {
@@ -25,6 +25,8 @@ public class RoomService {
     private MessageService messageService;
     @Autowired
     private PresentService presentService;
+    @Autowired
+    EntityConverter entityConverter;
     public String saveRoom(RoomDTO roomDTO) {
         if(!checkEmailDuplicate(roomDTO.getRoomEmail())) {
             //email 중복 검사 후 해당 email의 계정이 존재하지 않는다면 방 생성 진행
@@ -39,19 +41,6 @@ public class RoomService {
     }
     public boolean checkEmailDuplicate(String email) {
         return roomRepository.existsByroomEmail(email);
-    }
-    public StringBuffer createRandomId() {
-        Random rnd = new Random();
-        StringBuffer buf = new StringBuffer();
-
-        for(int i = 0; i < 6; i++) {
-            if(rnd.nextBoolean()){
-                buf.append((char)((int)(rnd.nextInt(26))+97));
-            }else{
-                buf.append((rnd.nextInt(10)));
-            }
-        }
-        return buf;
     }
     public JsonObject getRoomcontents(String roomId) {
         RoomDTO roomDTO = findById(roomId);
@@ -87,7 +76,7 @@ public class RoomService {
         Optional<RoomEntity> optionalRoomEntity = roomRepository.findById(roomId);
         if(optionalRoomEntity.isPresent()) {
             RoomEntity roomEntity = optionalRoomEntity.get();
-            RoomDTO roomDTO = RoomDTO.toRoomDTO(roomEntity);
+            RoomDTO roomDTO = entityConverter.converRoomDto(roomEntity);
             return roomDTO;
         }else {
             return null;
