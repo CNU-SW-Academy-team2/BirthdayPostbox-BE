@@ -1,6 +1,6 @@
 package com.project.BirthdayPostbox.service;
 
-import com.project.BirthdayPostbox.converter.EntityConverter;
+import com.project.BirthdayPostbox.util.EntityConverter;
 import com.project.BirthdayPostbox.dto.PresentDTO;
 import com.project.BirthdayPostbox.entity.PresentEntity;
 import com.project.BirthdayPostbox.repository.PresentRepository;
@@ -55,7 +55,7 @@ public class PresentService {
         Collection<PresentEntity> presentEntities = repository.findByroom_id(roomId);
         List<PresentDTO> presentDTOList = new ArrayList<>();
         for(PresentEntity presentEntity : presentEntities) {
-            PresentDTO presentDTO = PresentDTO.toPresentDTO(presentEntity);
+            PresentDTO presentDTO = entityConverter.convertPresentDto(presentEntity);
             presentDTOList.add(presentDTO);
         }
         return presentDTOList;

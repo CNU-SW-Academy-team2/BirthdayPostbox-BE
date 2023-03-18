@@ -1,4 +1,4 @@
-package com.project.BirthdayPostbox.converter;
+package com.project.BirthdayPostbox.util;
 
 import com.project.BirthdayPostbox.dto.MessageDTO;
 import com.project.BirthdayPostbox.dto.PresentDTO;
@@ -58,7 +58,7 @@ public class EntityConverter {
                 .messageId(messageEntity.getMessageId())
                 .messageSender(messageEntity.getMessageSender())
                 .messageContent(messageEntity.getMessageContent())
-                .roomDTO(RoomDTO.toRoomDTO(messageEntity.getRoom()))
+                .roomDTO(converRoomDto(messageEntity.getRoom()))
                 .build();
     }
 
@@ -68,7 +68,16 @@ public class EntityConverter {
                 .presentSender(presentEntity.getPresentSender())
                 .presentContent(presentEntity.getPresentContent())
                 .presentImgUrl(presentEntity.getPresentImgUrl())
-                .roomDTO(RoomDTO.toRoomDTO(presentEntity.getRoom()))
+                .roomDTO(converRoomDto(presentEntity.getRoom()))
+                .build();
+    }
+    public RoomDTO converRoomDto(RoomEntity room) {
+        return RoomDTO.builder()
+                .roomId(room.getId())
+                .roomBirthdate(room.getRoomBirthdate())
+                .roomEmail(room.getRoomEmail())
+                .roomName(room.getRoomName())
+                .ownerCode(room.getOwnerCode())
                 .build();
     }
 }
