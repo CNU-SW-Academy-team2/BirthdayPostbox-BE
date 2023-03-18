@@ -8,6 +8,7 @@ import com.project.BirthdayPostbox.dto.PresentDTO;
 import com.project.BirthdayPostbox.dto.RoomDTO;
 import com.project.BirthdayPostbox.entity.RoomEntity;
 import com.project.BirthdayPostbox.repository.RoomRepository;
+import com.project.BirthdayPostbox.util.EntityConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,8 @@ public class RoomService {
     private MessageService messageService;
     @Autowired
     private PresentService presentService;
+    @Autowired
+    EntityConverter entityConverter;
     public String saveRoom(RoomDTO roomDTO) {
         if(!checkEmailDuplicate(roomDTO.getRoomEmail())) {
             //email 중복 검사 후 해당 email의 계정이 존재하지 않는다면 방 생성 진행
@@ -73,7 +76,7 @@ public class RoomService {
         Optional<RoomEntity> optionalRoomEntity = roomRepository.findById(roomId);
         if(optionalRoomEntity.isPresent()) {
             RoomEntity roomEntity = optionalRoomEntity.get();
-            RoomDTO roomDTO = RoomDTO.toRoomDTO(roomEntity);
+            RoomDTO roomDTO = entityConverter.converRoomDto(roomEntity);
             return roomDTO;
         }else {
             return null;
