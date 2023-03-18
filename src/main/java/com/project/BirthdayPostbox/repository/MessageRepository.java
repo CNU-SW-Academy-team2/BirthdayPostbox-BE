@@ -13,4 +13,5 @@ import java.util.Optional;
 public interface MessageRepository extends JpaRepository<MessageEntity, String> {
 
     Collection<MessageEntity> findByroom_id(String room_id);
+
 }

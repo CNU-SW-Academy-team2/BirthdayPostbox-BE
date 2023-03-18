@@ -13,5 +13,14 @@ public class MessageDTO {
     private String messageId;
     private String messageSender;
     private String messageContent;
-    private String room_id;
+    private RoomDTO roomDTO;
+
+    public static MessageDTO toMessageDTO(MessageEntity messageEntity) {
+        MessageDTO messageDTO = new MessageDTO();
+        messageDTO.setMessageId(messageEntity.getMessageId());
+        messageDTO.setMessageSender(messageEntity.getMessageSender());
+        messageDTO.setMessageContent(messageEntity.getMessageSender());
+
+        return messageDTO;
+    }
 }
