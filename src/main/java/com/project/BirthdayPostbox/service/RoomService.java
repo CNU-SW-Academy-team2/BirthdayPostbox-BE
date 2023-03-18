@@ -6,16 +6,15 @@ import com.project.BirthdayPostbox.Exception.ErrorCreate;
 import com.project.BirthdayPostbox.dto.MessageDTO;
 import com.project.BirthdayPostbox.dto.PresentDTO;
 import com.project.BirthdayPostbox.dto.RoomDTO;
-import com.project.BirthdayPostbox.entity.MessageEntity;
 import com.project.BirthdayPostbox.entity.RoomEntity;
-import com.project.BirthdayPostbox.repository.MessageRepository;
 import com.project.BirthdayPostbox.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Random;
+
+import static com.project.BirthdayPostbox.util.RoomIdCreate.createRandomId;
 
 @Service
 public class RoomService {
@@ -39,19 +38,6 @@ public class RoomService {
     }
     public boolean checkEmailDuplicate(String email) {
         return roomRepository.existsByroomEmail(email);
-    }
-    public StringBuffer createRandomId() {
-        Random rnd = new Random();
-        StringBuffer buf = new StringBuffer();
-
-        for(int i = 0; i < 6; i++) {
-            if(rnd.nextBoolean()){
-                buf.append((char)((int)(rnd.nextInt(26))+97));
-            }else{
-                buf.append((rnd.nextInt(10)));
-            }
-        }
-        return buf;
     }
     public JsonObject getRoomcontents(String roomId) {
         RoomDTO roomDTO = findById(roomId);
