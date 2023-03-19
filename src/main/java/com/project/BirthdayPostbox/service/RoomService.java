@@ -27,20 +27,26 @@ public class RoomService {
     private PresentService presentService;
     @Autowired
     EntityConverter entityConverter;
-    public String saveRoom(RoomDTO roomDTO) {
-        if(!checkEmailDuplicate(roomDTO.getRoomEmail())) {
-            //email 중복 검사 후 해당 email의 계정이 존재하지 않는다면 방 생성 진행
+
+    public String saveRoomInfo(RoomDTO roomDTO) {
+        if(!checkRoomCountOver(roomDTO.getRoomEmail())) {
+            //한 계정당 생성한 방이 5개를 초과하는지 확인하고 아니라면 방 생성 진행
             String RoomID = createRandomId().toString();
             roomDTO.setRoomId(RoomID);
             RoomEntity roomEntity = RoomEntity.toSaveEntity(roomDTO);
             roomRepository.save(roomEntity);
             return RoomID;
         }else {
-            throw new ErrorCreate(String.format("중복된 email [email: %s]", roomDTO.getRoomEmail()));
+            throw new ErrorCreate(String.format("방 생성 가능 횟수 초과된 email [email: %s]", roomDTO.getRoomEmail()));
         }
     }
-    public boolean checkEmailDuplicate(String email) {
-        return roomRepository.existsByroomEmail(email);
+    public boolean checkRoomCountOver(String email) {
+        int count = roomRepository.countByroomEmail(email);
+        if (count >= 5) {
+            return true;
+        }else {
+            return false;
+        }
     }
     public JsonObject getRoomcontents(String roomId) {
         RoomDTO roomDTO = findById(roomId);
