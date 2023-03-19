@@ -18,6 +18,7 @@ public class RoomController {
 //        System.out.println("room = " + roomDTO);
         return roomService.saveRoomInfo(roomDTO);
     }
+    //방 메세지 및 선물 조회 api
     @RequestMapping("room-content")
     public JsonObject getRoomcontents(@RequestParam("room_id") String room_id) {
         JsonObject returnJson = roomService.getRoomcontents(room_id);

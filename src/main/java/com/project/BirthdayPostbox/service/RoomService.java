@@ -79,13 +79,17 @@ public class RoomService {
         return obj;
     }
     public RoomDTO findById(String roomId) {
-        Optional<RoomEntity> optionalRoomEntity = roomRepository.findById(roomId);
-        if(optionalRoomEntity.isPresent()) {
-            RoomEntity roomEntity = optionalRoomEntity.get();
-            RoomDTO roomDTO = entityConverter.converRoomDto(roomEntity);
-            return roomDTO;
+        if(!roomRepository.findById(roomId).isEmpty()) {
+            Optional<RoomEntity> optionalRoomEntity = roomRepository.findById(roomId);
+            if(optionalRoomEntity.isPresent()) {
+                RoomEntity roomEntity = optionalRoomEntity.get();
+                RoomDTO roomDTO = entityConverter.converRoomDto(roomEntity);
+                return roomDTO;
+            }else {
+                return null;
+            }
         }else {
-            return null;
+            throw new ErrorCreate("생성되지 않은 방입니다.");
         }
     }
 }

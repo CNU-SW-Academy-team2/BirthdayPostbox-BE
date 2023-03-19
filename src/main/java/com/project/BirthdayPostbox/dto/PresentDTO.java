@@ -15,5 +15,4 @@ public class PresentDTO {
     private String presentImgUrl;
     private RoomDTO roomDTO;
     private String presentUrl;
-
 }

@@ -12,8 +12,11 @@ public class MessageController {
     MessageService service;
 
     @RequestMapping(value = "new-message", method = RequestMethod.POST)
-    public void newMessage(@RequestBody MessageDTO messageDTO) {
-        service.newMessage(messageDTO);
+    public void newMessage(@ModelAttribute MessageDTO messageDTO) {
+        System.out.println(messageDTO.getMessageSender());
+        System.out.println(messageDTO.getMessageContent());
+        System.out.println(messageDTO.getRoomDTO());
+//        service.newMessage(messageDTO);
     }
 
     @RequestMapping("message")

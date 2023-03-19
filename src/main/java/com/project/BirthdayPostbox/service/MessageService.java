@@ -21,7 +21,6 @@ public class MessageService {
     @Autowired
     EntityConverter entityConverter;
 
-
     public void newMessage(MessageDTO messageDTO) {
         String randomId = createId().toString();
         while (repository.existsById(randomId)){
