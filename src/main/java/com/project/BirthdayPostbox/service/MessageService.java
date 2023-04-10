@@ -1,5 +1,7 @@
 package com.project.BirthdayPostbox.service;
 
+import com.project.BirthdayPostbox.Exception.ErrorCode;
+import com.project.BirthdayPostbox.Exception.RestApiException;
 import com.project.BirthdayPostbox.util.EntityConverter;
 import com.project.BirthdayPostbox.dto.MessageDTO;
 import com.project.BirthdayPostbox.entity.MessageEntity;
@@ -31,10 +33,10 @@ public class MessageService {
         repository.save(messageEntity);
     }
 
-    public MessageDTO showMessage(String msg_id) throws Exception {
+    public MessageDTO showMessage(String msg_id) {
         return repository.findById(msg_id).
                 map(entityConverter::convertMessageDto)
-                .orElseThrow(() -> new Exception("메세지를 찾을 수 없습니다."));
+                .orElseThrow(() -> new RestApiException(ErrorCode.MESSAGE_NOT_FOUND));
     }
 
     public StringBuffer createId() {

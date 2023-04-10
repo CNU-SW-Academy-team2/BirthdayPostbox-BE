@@ -17,7 +17,7 @@ public class MessageController {
     }
 
     @RequestMapping("message")
-    public MessageDTO showMessage(@RequestParam("id") String msg_id) throws Exception {
+    public MessageDTO showMessage(@RequestParam("id") String msg_id) {
         return service.showMessage(msg_id);
     }
 }
