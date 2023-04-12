@@ -17,8 +17,7 @@ public class PresentController {
     }
 
     @RequestMapping("present")
-    public PresentDTO showPresent(@RequestParam("id") String present_id) throws Exception {
-        System.out.println(present_id);
-        return service.showPresent(present_id);
+    public PresentDTO showPresent(@RequestParam("id") String present_id, @RequestParam("owner_code") String owner_code) throws Exception {
+        return service.showPresent(present_id, owner_code);
     }
 }

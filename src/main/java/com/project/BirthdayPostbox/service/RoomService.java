@@ -2,7 +2,9 @@ package com.project.BirthdayPostbox.service;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.project.BirthdayPostbox.Exception.ErrorCode;
 import com.project.BirthdayPostbox.Exception.ErrorCreate;
+import com.project.BirthdayPostbox.Exception.RestApiException;
 import com.project.BirthdayPostbox.dto.MessageDTO;
 import com.project.BirthdayPostbox.dto.PresentDTO;
 import com.project.BirthdayPostbox.dto.RoomDTO;
@@ -89,7 +91,7 @@ public class RoomService {
                 return null;
             }
         }else {
-            throw new ErrorCreate("생성되지 않은 방입니다.");
+            throw new RestApiException(ErrorCode.ROOM_NOT_FOUND);
         }
     }
 }
