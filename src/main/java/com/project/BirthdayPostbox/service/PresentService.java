@@ -32,10 +32,16 @@ public class PresentService {
         repository.save(presentEntity);
     }
 
-    public PresentDTO showPresent(String present_id) {
-        return repository.findById(present_id)
+    public PresentDTO showPresent(String present_id, String owner_code) {
+        PresentDTO presentDTO = repository.findById(present_id)
                 .map(entityConverter::convertPresentDto)
                 .orElseThrow(() -> new RestApiException(ErrorCode.PRESENT_NOT_FOUND));
+        if (presentDTO.getRoomDTO().getOwnerCode() == owner_code) {
+            return presentDTO;
+        }
+        else {
+            throw new RestApiException(ErrorCode.OWNER_CODE_NOT_MATCHED);
+        }
     }
 
     public StringBuffer createId() {

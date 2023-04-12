@@ -33,10 +33,15 @@ public class MessageService {
         repository.save(messageEntity);
     }
 
-    public MessageDTO showMessage(String msg_id) {
-        return repository.findById(msg_id).
+    public MessageDTO showMessage(String msg_id, String owner_code) {
+        MessageDTO messageDTO = repository.findById(msg_id).
                 map(entityConverter::convertMessageDto)
                 .orElseThrow(() -> new RestApiException(ErrorCode.MESSAGE_NOT_FOUND));
+        if (messageDTO.getRoomDTO().getOwnerCode() == owner_code) {
+            return messageDTO;
+        } else {
+            throw new RestApiException(ErrorCode.OWNER_CODE_NOT_MATCHED);
+        }
     }
 
     public StringBuffer createId() {
