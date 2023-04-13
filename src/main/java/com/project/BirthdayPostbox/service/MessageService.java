@@ -38,7 +38,7 @@ public class MessageService {
         MessageDTO messageDTO = repository.findById(msg_id).
                 map(entityConverter::convertMessageDto)
                 .orElseThrow(() -> new RestApiException(ErrorCode.MESSAGE_NOT_FOUND));
-        if (messageDTO.getRoomDTO().getOwnerCode() == owner_code) {
+        if (messageDTO.getRoomDTO().getOwnerCode().equals(owner_code)) {
             JsonObject messageDTOobj = new JsonObject();
             messageDTOobj.addProperty("message_id", messageDTO.getMessageId());
             messageDTOobj.addProperty("message_sender", messageDTO.getMessageSender());
