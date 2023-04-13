@@ -1,5 +1,6 @@
 package com.project.BirthdayPostbox.controller;
 
+import com.google.gson.JsonObject;
 import com.project.BirthdayPostbox.dto.MessageDTO;
 import com.project.BirthdayPostbox.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class MessageController {
     }
 
     @RequestMapping("message")
-    public MessageDTO showMessage(@RequestParam("id") String msg_id, @RequestParam("owner_code") String owner_code) {
+    public JsonObject showMessage(@RequestParam("id") String msg_id, @RequestParam("owner_code") String owner_code) {
         return service.showMessage(msg_id, owner_code);
     }
 }

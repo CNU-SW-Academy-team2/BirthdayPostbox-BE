@@ -1,5 +1,6 @@
 package com.project.BirthdayPostbox.controller;
 
+import com.google.gson.JsonObject;
 import com.project.BirthdayPostbox.dto.PresentDTO;
 import com.project.BirthdayPostbox.service.PresentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class PresentController {
     }
 
     @RequestMapping("present")
-    public PresentDTO showPresent(@RequestParam("id") String present_id, @RequestParam("owner_code") String owner_code) throws Exception {
+    public JsonObject showPresent(@RequestParam("id") String present_id, @RequestParam("owner_code") String owner_code) throws Exception {
         return service.showPresent(present_id, owner_code);
     }
 }
