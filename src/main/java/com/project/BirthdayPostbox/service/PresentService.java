@@ -37,7 +37,8 @@ public class PresentService {
         PresentDTO presentDTO = repository.findById(present_id)
                 .map(entityConverter::convertPresentDto)
                 .orElseThrow(() -> new RestApiException(ErrorCode.PRESENT_NOT_FOUND));
-        if (presentDTO.getRoomDTO().getOwnerCode() == owner_code) {
+
+        if (presentDTO.getRoomDTO().getOwnerCode().equals(owner_code)) {
             JsonObject presentDTOobj = new JsonObject();
             presentDTOobj.addProperty("present_id", presentDTO.getPresentId());
             presentDTOobj.addProperty("present_sender", presentDTO.getPresentSender());
