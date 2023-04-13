@@ -78,6 +78,7 @@ public class EntityConverter {
                 .roomEmail(room.getRoomEmail())
                 .roomName(room.getRoomName())
                 .ownerCode(room.getOwnerCode())
+                .roomCategory(room.getRoomCategory())
                 .build();
     }
 }

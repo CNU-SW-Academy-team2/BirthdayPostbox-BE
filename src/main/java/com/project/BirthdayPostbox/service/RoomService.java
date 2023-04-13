@@ -76,6 +76,7 @@ public class RoomService {
         JsonObject obj = new JsonObject();
         obj.addProperty("room_name", roomDTO.getRoomName());
         obj.addProperty("room_date", roomDTO.getRoomBirthdate().toString());
+        obj.addProperty("room_category", roomDTO.getRoomCategory().toString());
         obj.add("messages", jsonMessageArray);
         obj.add("presents", jsonPresentArray);
         return obj;
