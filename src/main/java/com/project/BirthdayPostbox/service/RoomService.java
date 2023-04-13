@@ -99,7 +99,7 @@ public class RoomService {
     /*****************************************************************************************/
     @Autowired
     EmailService emailService;
-    @Scheduled(cron = "0 * * * * *", zone = "Asia/Seoul") //매분 실행
+    @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul") //매일 0시마다 실행, 매분 실행: "0 * * * * *"
     public void generateOwnerCode() {
         Collection<RoomEntity> roomEntities = roomRepository.findByRoomBirthdate(new Date());
         for (RoomEntity roomEntity : roomEntities) {
