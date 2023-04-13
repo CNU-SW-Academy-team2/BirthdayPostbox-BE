@@ -12,8 +12,11 @@ import com.project.BirthdayPostbox.entity.RoomEntity;
 import com.project.BirthdayPostbox.repository.RoomRepository;
 import com.project.BirthdayPostbox.util.EntityConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,6 +96,18 @@ public class RoomService {
             }
         }else {
             throw new RestApiException(ErrorCode.ROOM_NOT_FOUND);
+        }
+    }
+
+    /*****************************************************************************************/
+    @Autowired
+    EmailService emailService;
+    @Scheduled(cron = "0 0 0 * * *", zone = "Asia/Seoul") //매일 0시마다 실행, 매분 실행: "0 * * * * *"
+    public void generateOwnerCode() {
+        Collection<RoomEntity> roomEntities = roomRepository.findByRoomBirthdate(new Date());
+        for (RoomEntity roomEntity : roomEntities) {
+            roomEntity.setOwnerCode(createRandomId().toString());
+            emailService.sendEmail(roomEntity.getRoomEmail(), roomEntity.getOwnerCode());
         }
     }
 }
