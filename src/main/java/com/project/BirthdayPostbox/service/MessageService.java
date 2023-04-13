@@ -1,5 +1,6 @@
 package com.project.BirthdayPostbox.service;
 
+import com.google.gson.JsonObject;
 import com.project.BirthdayPostbox.Exception.ErrorCode;
 import com.project.BirthdayPostbox.Exception.RestApiException;
 import com.project.BirthdayPostbox.util.EntityConverter;
@@ -33,12 +34,17 @@ public class MessageService {
         repository.save(messageEntity);
     }
 
-    public MessageDTO showMessage(String msg_id, String owner_code) {
+    public JsonObject showMessage(String msg_id, String owner_code) {
         MessageDTO messageDTO = repository.findById(msg_id).
                 map(entityConverter::convertMessageDto)
                 .orElseThrow(() -> new RestApiException(ErrorCode.MESSAGE_NOT_FOUND));
         if (messageDTO.getRoomDTO().getOwnerCode() == owner_code) {
-            return messageDTO;
+            JsonObject messageDTOobj = new JsonObject();
+            messageDTOobj.addProperty("message_id", messageDTO.getMessageId());
+            messageDTOobj.addProperty("message_sender", messageDTO.getMessageSender());
+            messageDTOobj.addProperty("message_content", messageDTO.getMessageContent());
+            messageDTOobj.addProperty("room_category", messageDTO.getRoomDTO().getRoomCategory().toString());
+            return messageDTOobj;
         } else {
             throw new RestApiException(ErrorCode.OWNER_CODE_NOT_MATCHED);
         }
