@@ -27,6 +27,7 @@ public class EntityConverter {
         messageEntity.setMessageId(messageDTO.getMessageId());
         messageEntity.setMessageSender(messageDTO.getMessageSender());
         messageEntity.setMessageContent(messageDTO.getMessageContent());
+        messageEntity.setMessageDesign(messageDTO.getMessageDesign());
         messageEntity.setRoom(RoomEntity.toSaveEntity(messageDTO.getRoomDTO()));
         return messageEntity;
     }
@@ -37,20 +38,12 @@ public class EntityConverter {
         presentEntity.setPresentSender(presentDTO.getPresentSender());
         presentEntity.setPresentContent(presentDTO.getPresentContent());
         presentEntity.setPresentImgUrl(presentDTO.getPresentImgUrl());
+        presentEntity.setPresentDesign(presentDTO.getPresentDesign());
         presentEntity.setRoom(RoomEntity.toSaveEntity(presentDTO.getRoomDTO()));
         return presentEntity;
     }
 
     //entity -> dto
-//    public RoomDTO convertRoomDto(Room room){
-//        return RoomDTO.builder()
-//                .roomId(room.getRoomId())
-//                .roomName(room.getRoomName())
-//                .roomEmail(room.getRoomEmail())
-//                //.roomBirthdate(room.getRoomBirthdate())
-//                .ownerCode(room.getOwnerCode())
-//                .build();
-//    }
 
     public MessageDTO convertMessageDto(MessageEntity messageEntity) {
 
@@ -58,6 +51,7 @@ public class EntityConverter {
                 .messageId(messageEntity.getMessageId())
                 .messageSender(messageEntity.getMessageSender())
                 .messageContent(messageEntity.getMessageContent())
+                .messageDesign(messageEntity.getMessageDesign())
                 .roomDTO(converRoomDto(messageEntity.getRoom()))
                 .build();
     }
@@ -68,6 +62,7 @@ public class EntityConverter {
                 .presentSender(presentEntity.getPresentSender())
                 .presentContent(presentEntity.getPresentContent())
                 .presentImgUrl(presentEntity.getPresentImgUrl())
+                .presentDesign(presentEntity.getPresentDesign())
                 .roomDTO(converRoomDto(presentEntity.getRoom()))
                 .build();
     }
@@ -78,7 +73,9 @@ public class EntityConverter {
                 .roomEmail(room.getRoomEmail())
                 .roomName(room.getRoomName())
                 .ownerCode(room.getOwnerCode())
-                .roomCategory(room.getRoomCategory())
+                .roomDesign(room.getRoomDesign())
+                .messageDesignCategory(room.getMessageDesignCategory())
+                .presentDesignCategory(room.getPresentDesignCategory())
                 .build();
     }
 }

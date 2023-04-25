@@ -1,9 +1,11 @@
 package com.project.BirthdayPostbox.dto;
 
-import com.project.BirthdayPostbox.entity.RoomEntity;
 import java.sql.Date;
 
+import com.project.BirthdayPostbox.util.MessageDesignCategory;
+import com.project.BirthdayPostbox.util.PresentDesignCategory;
 import com.project.BirthdayPostbox.util.RoomCategory;
+import com.project.BirthdayPostbox.util.RoomDesign;
 import lombok.*;
 
 @Getter
@@ -19,4 +21,7 @@ public class RoomDTO {
     private RoomCategory roomCategory;
     private String roomEmail;
     private String ownerCode;
+    private RoomDesign roomDesign;
+    private MessageDesignCategory messageDesignCategory;
+    private PresentDesignCategory presentDesignCategory;
 }

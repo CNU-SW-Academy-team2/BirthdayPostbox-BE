@@ -15,7 +15,7 @@ public class RoomController {
     //방 생성 api
     @PostMapping("new-room")
     public String saveRoomInfo(@ModelAttribute RoomDTO roomDTO) {
-//        System.out.println("room = " + roomDTO);
+        System.out.println("room = " + roomDTO);
         return roomService.saveRoomInfo(roomDTO);
     }
     //방 메세지 및 선물 조회 api
@@ -29,5 +29,10 @@ public class RoomController {
     public String test() {
         System.out.println("he");
         return "test";
+    }
+
+    @RequestMapping("set-ownercode")
+    public String setOwnerCodeForTest(@RequestParam("room_id") String room_id) {
+        return roomService.setOwnerCodeForTest(room_id);
     }
 }

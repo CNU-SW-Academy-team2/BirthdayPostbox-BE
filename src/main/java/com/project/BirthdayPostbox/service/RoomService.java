@@ -63,6 +63,7 @@ public class RoomService {
             JsonObject messageDTOobj = new JsonObject();
             messageDTOobj.addProperty("message_id", messageDTO.getMessageId());
             messageDTOobj.addProperty("message_sender", messageDTO.getMessageSender());
+            messageDTOobj.addProperty("message_design", messageDTO.getMessageDesign().toString());
             jsonMessageArray.add(messageDTOobj);
         }
 
@@ -73,13 +74,16 @@ public class RoomService {
             JsonObject presentDTOobj = new JsonObject();
             presentDTOobj.addProperty("present_id", presentDTO.getPresentId());
             presentDTOobj.addProperty("present_sender", presentDTO.getPresentSender());
+            presentDTOobj.addProperty("present_design", presentDTO.getPresentDesign().toString());
             jsonPresentArray.add(presentDTOobj);
         }
 
         JsonObject obj = new JsonObject();
         obj.addProperty("room_name", roomDTO.getRoomName());
         obj.addProperty("room_date", roomDTO.getRoomBirthdate().toString());
-        obj.addProperty("room_category", roomDTO.getRoomCategory().toString());
+        obj.addProperty("room_design", roomDTO.getRoomDesign().toString());
+        obj.addProperty("message_design_category", roomDTO.getMessageDesignCategory().toString());
+        obj.addProperty("present_design_category", roomDTO.getPresentDesignCategory().toString());
         obj.add("messages", jsonMessageArray);
         obj.add("presents", jsonPresentArray);
         return obj;
@@ -107,7 +111,15 @@ public class RoomService {
         Collection<RoomEntity> roomEntities = roomRepository.findByRoomBirthdate(new Date());
         for (RoomEntity roomEntity : roomEntities) {
             roomEntity.setOwnerCode(createRandomId().toString());
+            roomRepository.save(roomEntity);
             emailService.sendEmail(roomEntity.getRoomEmail(), roomEntity.getOwnerCode());
         }
+    }
+
+    public String setOwnerCodeForTest(String room_id) {
+        RoomEntity room = roomRepository.findById(room_id).orElseThrow(() -> new RestApiException(ErrorCode.ROOM_NOT_FOUND));
+        room.setOwnerCode(createRandomId().toString());
+        roomRepository.save(room);
+        return room.getOwnerCode();
     }
 }

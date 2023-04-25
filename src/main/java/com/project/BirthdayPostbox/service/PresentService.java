@@ -23,7 +23,7 @@ public class PresentService {
     @Autowired
     EntityConverter entityConverter;
 
-    public void newPresent(PresentDTO presentDTO) {
+    public String newPresent(PresentDTO presentDTO) {
         String randomId = createId().toString();
         while (repository.existsById(randomId)){
             randomId = createId().toString();
@@ -31,6 +31,7 @@ public class PresentService {
         presentDTO.setPresentId(randomId);
         PresentEntity presentEntity = entityConverter.convertPresent(presentDTO);
         repository.save(presentEntity);
+        return presentEntity.getPresentId();
     }
 
     public JsonObject showPresent(String present_id, String owner_code) {
@@ -44,7 +45,7 @@ public class PresentService {
             presentDTOobj.addProperty("present_sender", presentDTO.getPresentSender());
             presentDTOobj.addProperty("present_content", presentDTO.getPresentContent());
             presentDTOobj.addProperty("present_img_url", presentDTO.getPresentImgUrl());
-            presentDTOobj.addProperty("room_category", presentDTO.getRoomDTO().getRoomCategory().toString());
+            presentDTOobj.addProperty("present_design", presentDTO.getPresentDesign().toString());
             return presentDTOobj;
         }
         else {

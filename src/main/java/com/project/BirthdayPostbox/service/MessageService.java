@@ -24,7 +24,7 @@ public class MessageService {
     @Autowired
     EntityConverter entityConverter;
 
-    public void newMessage(MessageDTO messageDTO) {
+    public String newMessage(MessageDTO messageDTO) {
         String randomId = createId().toString();
         while (repository.existsById(randomId)){
             randomId = createId().toString();
@@ -32,6 +32,7 @@ public class MessageService {
         messageDTO.setMessageId(randomId);
         MessageEntity messageEntity = entityConverter.convertMessage(messageDTO);
         repository.save(messageEntity);
+        return messageEntity.getMessageId();
     }
 
     public JsonObject showMessage(String msg_id, String owner_code) {
@@ -43,7 +44,7 @@ public class MessageService {
             messageDTOobj.addProperty("message_id", messageDTO.getMessageId());
             messageDTOobj.addProperty("message_sender", messageDTO.getMessageSender());
             messageDTOobj.addProperty("message_content", messageDTO.getMessageContent());
-            messageDTOobj.addProperty("room_category", messageDTO.getRoomDTO().getRoomCategory().toString());
+            messageDTOobj.addProperty("message_design", messageDTO.getMessageDesign().toString());
             return messageDTOobj;
         } else {
             throw new RestApiException(ErrorCode.OWNER_CODE_NOT_MATCHED);

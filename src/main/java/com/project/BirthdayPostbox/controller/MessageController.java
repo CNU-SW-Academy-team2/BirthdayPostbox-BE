@@ -13,8 +13,8 @@ public class MessageController {
     MessageService service;
 
     @RequestMapping(value = "new-message", method = RequestMethod.POST)
-    public void newMessage(@RequestBody MessageDTO messageDTO) {
-        service.newMessage(messageDTO);
+    public String newMessage(@RequestBody MessageDTO messageDTO) {
+        return service.newMessage(messageDTO);
     }
 
     @RequestMapping("message")

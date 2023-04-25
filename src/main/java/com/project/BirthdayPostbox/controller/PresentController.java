@@ -13,12 +13,12 @@ public class PresentController {
     PresentService service;
 
     @RequestMapping(value = "new-present", method = RequestMethod.POST)
-    public void newPresent(@RequestBody PresentDTO presentDTO) {
-        service.newPresent(presentDTO);
+    public String newPresent(@RequestBody PresentDTO presentDTO) {
+        return service.newPresent(presentDTO);
     }
 
     @RequestMapping("present")
-    public JsonObject showPresent(@RequestParam("id") String present_id, @RequestParam("owner_code") String owner_code) throws Exception {
+    public JsonObject showPresent(@RequestParam("id") String present_id, @RequestParam("owner_code") String owner_code) {
         return service.showPresent(present_id, owner_code);
     }
 }

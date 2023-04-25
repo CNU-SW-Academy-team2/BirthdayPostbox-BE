@@ -1,6 +1,6 @@
 package com.project.BirthdayPostbox.dto;
 
-import com.project.BirthdayPostbox.entity.PresentEntity;
+import com.project.BirthdayPostbox.util.PresentDesign;
 import lombok.*;
 
 @Getter
@@ -14,4 +14,5 @@ public class PresentDTO {
     private String presentContent;
     private String presentImgUrl;
     private RoomDTO roomDTO;
+    private PresentDesign presentDesign;
 }
