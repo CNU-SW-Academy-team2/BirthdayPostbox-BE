@@ -1,5 +1,6 @@
 package com.project.BirthdayPostbox.entity;
 
+import com.project.BirthdayPostbox.util.MessageDesign;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,4 +29,7 @@ public class MessageEntity {
     @JoinColumn(name = "room_id", referencedColumnName = "room_id")
     private RoomEntity room;
 
+    @Enumerated(value=EnumType.STRING)
+    @Column(name = "message_design")
+    private MessageDesign messageDesign;
 }

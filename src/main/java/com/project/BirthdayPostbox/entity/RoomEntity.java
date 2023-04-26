@@ -1,7 +1,10 @@
 package com.project.BirthdayPostbox.entity;
 import com.project.BirthdayPostbox.dto.RoomDTO;
 
+import com.project.BirthdayPostbox.util.MessageDesignCategory;
+import com.project.BirthdayPostbox.util.PresentDesignCategory;
 import com.project.BirthdayPostbox.util.RoomCategory;
+import com.project.BirthdayPostbox.util.RoomDesign;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +27,15 @@ public class RoomEntity {
     @Enumerated(value=EnumType.STRING)
     @Column(name = "room_category")
     private RoomCategory roomCategory;
+    @Enumerated(value=EnumType.STRING)
+    @Column(name = "room_design")
+    private RoomDesign roomDesign;
+    @Enumerated(value=EnumType.STRING)
+    @Column(name = "message_design_category")
+    private MessageDesignCategory messageDesignCategory;
+    @Enumerated(value=EnumType.STRING)
+    @Column(name = "present_design_category")
+    private PresentDesignCategory presentDesignCategory;
     @Column(name = "owner_code")
     private String ownerCode;
 
@@ -35,6 +47,9 @@ public class RoomEntity {
         roomEntity.setRoomEmail(roomDTO.getRoomEmail());
         roomEntity.setOwnerCode(roomDTO.getOwnerCode());
         roomEntity.setRoomCategory(roomDTO.getRoomCategory());
+        roomEntity.setRoomDesign(roomDTO.getRoomDesign());
+        roomEntity.setMessageDesignCategory(roomDTO.getMessageDesignCategory());
+        roomEntity.setPresentDesignCategory(roomDTO.getPresentDesignCategory());
         return roomEntity;
     }
 }

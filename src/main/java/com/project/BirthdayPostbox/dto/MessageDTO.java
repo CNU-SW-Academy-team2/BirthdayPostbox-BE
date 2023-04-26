@@ -1,8 +1,7 @@
 package com.project.BirthdayPostbox.dto;
 
-import com.project.BirthdayPostbox.entity.MessageEntity;
+import com.project.BirthdayPostbox.util.MessageDesign;
 import lombok.*;
-import org.aspectj.bridge.Message;
 
 @Getter
 @Setter
@@ -14,4 +13,5 @@ public class MessageDTO {
     private String messageSender;
     private String messageContent;
     private RoomDTO roomDTO;
+    private MessageDesign messageDesign;
 }

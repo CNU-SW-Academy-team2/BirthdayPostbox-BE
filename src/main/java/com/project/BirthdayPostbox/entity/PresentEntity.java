@@ -1,5 +1,6 @@
 package com.project.BirthdayPostbox.entity;
 
+import com.project.BirthdayPostbox.util.PresentDesign;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,4 +31,7 @@ public class PresentEntity {
     @JoinColumn(name = "room_id", referencedColumnName = "room_id")
     private RoomEntity room;
 
+    @Enumerated(value=EnumType.STRING)
+    @Column(name = "present_design")
+    private PresentDesign presentDesign;
 }
