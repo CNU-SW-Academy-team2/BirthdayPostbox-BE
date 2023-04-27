@@ -9,7 +9,9 @@ import com.project.BirthdayPostbox.entity.PresentEntity;
 import com.project.BirthdayPostbox.repository.PresentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,14 +23,21 @@ public class PresentService {
     PresentRepository repository;
 
     @Autowired
+    private S3Uploader s3Uploader;
+
+    @Autowired
     EntityConverter entityConverter;
 
-    public String newPresent(PresentDTO presentDTO) {
+    public String newPresent(MultipartFile image, PresentDTO presentDTO) throws IOException {
         String randomId = createId().toString();
         while (repository.existsById(randomId)){
             randomId = createId().toString();
         }
         presentDTO.setPresentId(randomId);
+        if(!image.isEmpty()) {
+            String storedFileName = s3Uploader.upload(image,"images");
+            presentDTO.setPresentImgUrl(storedFileName);
+        }
         PresentEntity presentEntity = entityConverter.convertPresent(presentDTO);
         repository.save(presentEntity);
         return presentEntity.getPresentId();
